@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pb:gen": "./scripts/gen.sh greet"
   },
   "keywords": [],
   "author": "",
@@ -11,6 +12,9 @@
   "description": "",
   "dependencies": {
     "@grpc/grpc-js": "^1.14.3",
-    "@grpc/proto-loader": "^0.8.0"
+    "google-protobuf": "^4.0.1"
+  },
+  "devDependencies": {
+    "grpc-tools": "^1.13.1"
   }
 }
