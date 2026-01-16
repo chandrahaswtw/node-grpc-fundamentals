@@ -1,5 +1,12 @@
 // GENERATED CODE -- DO NOT EDIT!
 
+// Original file comments:
+// 
+// string first_name = 1;
+// 1, 2, 3 are field tags. 
+// Used internally by Protobuf for binary encoding.
+// Never reuse or renumber them once published.
+// Lower numbers = more efficient encoding.
 'use strict';
 var grpc = require('@grpc/grpc-js');
 var greet_pb = require('./greet_pb.js');

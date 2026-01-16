@@ -1,0 +1,12 @@
+syntax= "proto3";
+
+package calculator;
+
+message SumRequest{
+    int32 num1 = 1;
+    int32 num2 = 2;
+}
+
+message SumResponse {
+    int64 result = 1;
+}
