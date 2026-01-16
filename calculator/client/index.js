@@ -9,7 +9,9 @@ function main() {
   const client = new CalculatorServiceClient("localhost:5001", creds);
 
   // Make request from client
-  console.log("Greet - client");
+  console.log("Calculator - client");
+
+  // This is how we pass multiple values
   const req = new SumRequest().setNum1(2).setNum2(3);
   client.sum(req, (err, res) => {
     if (err) {
