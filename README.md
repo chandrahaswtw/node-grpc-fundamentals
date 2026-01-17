@@ -37,25 +37,6 @@ npm install
 npm install @grpc/grpc-js google-protobuf --save
 npm install grpc-tools --save-dev
 ```
-
----
-
-## Project Structure
-
-```text
-.
-├── proto/
-│   └── greet.proto
-├── server/
-│   └── index.js
-├── client/
-│   └── index.js
-├── scripts/
-│   └── gen.sh
-├── package.json
-└── README.md
-```
-
 ---
 
 ## Protocol Buffers
@@ -169,8 +150,6 @@ Stream of requests ↔ stream of responses.
 * Compatible with **Node.js 16+**.
 
 ---
-
-## References
 
 ## References
 
