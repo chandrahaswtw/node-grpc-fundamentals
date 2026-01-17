@@ -47,12 +47,13 @@ On the client side, the same RPC is invoked using client.greet(...).
 
 */
 
-const { GreetResponse } = require("./../proto/greet_pb");
+const { GreetResponse, Lo } = require("./../proto/greet_pb");
 
 // Unary API's we can use the
 
 exports.greet = (call, callback) => {
-  console.log("Greet - server");
+  console.log("Unary server");
+
   const res = new GreetResponse().setResult(
     `Hello ${call.request.getFirstName()}`
   );
@@ -64,7 +65,7 @@ exports.greet = (call, callback) => {
 // Server streaming
 // We've used call instead of calling callback as we done for unary API's
 exports.greetManyTimes = (call, _) => {
-  console.log("Greet many times is invoked");
+  console.log("Server streaming");
 
   for (let i = 0; i < 10; i++) {
     const res = new GreetResponse();
@@ -73,4 +74,22 @@ exports.greetManyTimes = (call, _) => {
   }
 
   call.end();
+};
+
+//Client streaming
+// Using call.on data and end events to catch the data.
+exports.longGreet = (call, callback) => {
+  console.log("Client streaming");
+
+  let greet = "";
+
+  call.on("data", (req) => {
+    greet += `Hello ${req.getFirstName()} \n`;
+  });
+
+  call.on("end", (req) => {
+    const res = new GreetResponse();
+    res.setResult(greet);
+    callback(null, res);
+  });
 };

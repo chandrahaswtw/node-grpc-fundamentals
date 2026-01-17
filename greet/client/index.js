@@ -8,7 +8,7 @@ const { GreetRequest } = require("./../proto/greet_pb");
 
 function greetOnce(client) {
   // Make request from client
-  console.log("Greet - client");
+  console.log("Greet once");
   const req = new GreetRequest().setFirstName("Chandrahas here");
 
   // This .greet should align with the method name what we exported in serviceImpl
@@ -22,16 +22,21 @@ function greetOnce(client) {
   });
 }
 
-function greetManyTimes(client) {
+function longGreet(client) {
   // Make request from client
-  console.log("Greet - client");
-  const req = new GreetRequest().setFirstName("Chandrahas here");
-
-  // This .greet should align with the method name what we exported in serviceImpl
-  const call = client.greetManyTimes(req);
-  call.on("data", (res) => {
-    console.log(`Res sent successfully ${res.getResult()}`);
+  console.log("Long greet");
+  const names = ["Chandrahas", "Robert", "Ford"];
+  const req = new GreetRequest();
+  const call = client.longGreet(req, (err, res) => {
+    if (err) {
+      return console.log(err);
+    }
+    console.log(`Long greet ${res.getResult()}`);
   });
+  names
+    .map((name) => new GreetRequest().setFirstName(name))
+    .forEach((req) => call.write(req));
+  call.end();
 }
 
 function main() {
@@ -40,7 +45,8 @@ function main() {
   // Takes address of sever.
   const client = new GreetServiceClient("localhost:5001", creds);
   //greetOnce(client);
-  greetManyTimes(client);
+  //greetManyTimes(client);
+  longGreet(client);
 }
 
 main();
