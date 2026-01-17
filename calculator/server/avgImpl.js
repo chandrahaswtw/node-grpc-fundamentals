@@ -1,3 +1,9 @@
+/*
+Client streaming
+
+This returns the average of numbers.
+*/
+
 const { AvgResponse } = require("./../proto/avg_pb");
 
 exports.avg = (call, callback) => {

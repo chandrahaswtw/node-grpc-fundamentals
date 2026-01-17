@@ -93,3 +93,21 @@ exports.longGreet = (call, callback) => {
     callback(null, res);
   });
 };
+
+// Bi-directional streaming
+exports.greetEveryone = (call, callback) => {
+  console.log("Bi-directional streaming");
+
+  // As soon as we recieve the data from client we send.
+  call.on("data", (req) => {
+    const name = req.getFirstName();
+    const res = new GreetResponse();
+    res.setResult(`Hello ${name}`);
+    call.write(res);
+  });
+
+  call.on("end", (req) => {
+    // After the client streaming got ended we then start server streaming.
+    call.end();
+  });
+};

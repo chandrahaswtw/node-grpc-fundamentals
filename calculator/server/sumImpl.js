@@ -1,4 +1,5 @@
-const { SumResponse } = require("./../proto/sum_pb");
+// Unary
+const { MaxResponse } = require("./../proto/sum_pb");
 
 exports.sum = (call, callback) => {
   const res = new SumResponse().setResult(
